@@ -8,7 +8,7 @@ namespace ExamenApp2
         {
             InitializeComponent();
 
-            MainPage = new ProveedoresMainPage();
+            MainPage = new NavigationPage(new ProveedoresMainPage());
         }
     }
 }

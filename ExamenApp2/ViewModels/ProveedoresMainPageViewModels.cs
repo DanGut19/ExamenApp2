@@ -55,6 +55,18 @@ namespace ExamenApp2.ViewModels
                     case "Actualizar":
                         await App.Current.MainPage.Navigation.PushAsync(new ProveedoresFormPage(proveedores));
                         break;
+                    case "Eliminar":
+                        bool respuesta = await App.Current!.MainPage!.DisplayAlert("Eliminar proveedores", "¿Desea eliminar el proveedores?", "Si", "No");
+
+                        if (respuesta)
+                        {
+                            int del = _proveedoresServices.Delete(proveedores);
+                            if (del > 0)
+                            {
+                                ProveedoresServices.Remove(proveedores);
+                            }
+                        }
+                        break;
                 }
             } 
             catch (Exception ex) 

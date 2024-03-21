@@ -2,11 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExamenApp2.Views.ProveedoresFormPage"
+             xmlns:viewModels="clr-namespace:ExamenApp2.ViewModels"
+             x:DataType="viewModels:ProveedoresFormPageViewModels"
              Title="ProveedoresFormPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+    <VerticalStackLayout Padding="30,10,30,10" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+
+        <Label Text="Nombre completo:" />
+        <Entry Text="{Binding Nombre}" Keyboard="Text" />
+
+        <Label Text="Dirección:" />
+        <Entry Text="{Binding Cliente}" Keyboard="Text" />
+
+        <Label Text="Teléfono:" />
+        <Entry Text="{Binding Direccion}" Keyboard="Text" />
+
+        <Label Text="Correo electrónico:" />
+        <Entry Text="{Binding Empresa}" Keyboard="Text" />
+
+        <Label Text="Límite de crédito:" />
+        <Entry Text="{Binding Producto}" Keyboard="Numeric" />
+
+        <Button Text="Guardar" Command="{Binding CreateUpdateCommand}" />
+
     </VerticalStackLayout>
+    
 </ContentPage>
