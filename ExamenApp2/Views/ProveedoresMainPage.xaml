@@ -2,11 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExamenApp2.Views.ProveedoresMainPage"
-             Title="ProveedoresMainPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewModel="clr-namespace:ExamenApp2.ViewModels"
+             x:DataType="viewModel:ProveedoresMainPageViewModels"
+             xmlns:models="clr-namespace:ExamenApp2.Models"
+             Title="Listado De Proveedores">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10, 0, 10, 0">
+            <Button Text="Agreagr Producto" HorizontalOptions="Start" Command="{Binding GoToProveedoresFormPageCommand}"/>
+
+            <Grid Margin="0,5,0,5" RowDefinitions="Auto" ColumnDefinitions="33*,33*,33*">
+                <Label Text="Nombre" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="Cliente" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="1"/>
+                <Label Text="Direccion" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="2"/>
+                <Label Text="Empresa" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="3"/>
+                <Label Text="Producto" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="4"/>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding ProveedoresCollection}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Proveedores">
+                        <Grid RowSpacing="0" RowDefinitions="10,Auto,10,0.5" ColumnDefinitions="33*,33*,33*,33*,33*" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding Nombre}" Grid.Row="1" Grid.Column="0"/>
+                            <Label Text="{Binding Cliente}" Grid.Row="1" Grid.Column="1"/>
+                            <Label Text="{Binding Direccion}" Grid.Row="1" Grid.Column="2"/>
+                            <Label Text="{Binding Empresa}" Grid.Row="1" Grid.Column="3"/>
+                            <Label Text="{Binding Producto}" Grid.Row="1" Grid.Column="4"/>
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModel:ProveedoresMainPageViewModels}},Path=SelectProveedoresCommand}" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

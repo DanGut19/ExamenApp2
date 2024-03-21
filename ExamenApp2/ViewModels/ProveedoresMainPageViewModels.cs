@@ -59,13 +59,13 @@ namespace ExamenApp2.ViewModels
             } 
             catch (Exception ex) 
             {
-                Alerta("ERROE", ex.Message);
+                Error(ex.Message);
             }
         }
-
-        private async void Alerta(string Tipo, string Mensaje)
+        
+        private async void Error(string Mensaje)
         {
-            MainThread.BeginInvokeOnMainThread(async () => await App.Current!.MainPage!.DisplayAlert(Tipo, Mensaje, "Aceptar"));
+            MainThread.BeginInvokeOnMainThread(async () => await App.Current!.MainPage!.DisplayAlert("ERROE", Mensaje, "Aceptar"));
         }
 
     }
