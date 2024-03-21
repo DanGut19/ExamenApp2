@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExamenApp2.Models;
 using ExamenApp2.Services;
 using ExamenApp2.Views;
@@ -36,5 +37,36 @@ namespace ExamenApp2.ViewModels
                 }
             }
         }
+
+        [RelayCommand]
+        private async Task GoToProveedoresFormPage()
+        {
+            await App.Current!.MainPage!.Navigation.PushAsync(new ProveedoresFormPage());
+        }
+
+        [RelayCommand]
+        private async Task SelectProveedores(Proveedores proveedores)
+        {
+            try 
+            {
+                string res = await App.Current!.MainPage!.DisplayActionSheet("Operacion", "Cancelar", null, "Actualizar", "Eliminar");
+                switch (res) 
+                {
+                    case "Actualizar":
+                        await App.Current.MainPage.Navigation.PushAsync(new ProveedoresFormPage(proveedores));
+                        break;
+                }
+            } 
+            catch (Exception ex) 
+            {
+                Alerta("ERROE", ex.Message);
+            }
+        }
+
+        private async void Alerta(string Tipo, string Mensaje)
+        {
+            MainThread.BeginInvokeOnMainThread(async () => await App.Current!.MainPage!.DisplayAlert(Tipo, Mensaje, "Aceptar"));
+        }
+
     }
 }
